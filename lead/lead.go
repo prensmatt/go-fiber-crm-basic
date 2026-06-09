@@ -35,7 +35,10 @@ func NewLead(c *fiber.Ctx) error {
 	if err := c.BodyParser(lead); err != nil {
 		return c.Status(503).SendString(err.Error())
 	}
-	db.Create(&lead)
+	result := db.Create(&lead)
+	if result.Error != nil{
+		return c.Status(500).SendString(result.Error.Error())
+	}
 	return c.JSON(lead)
 }
 
