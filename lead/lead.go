@@ -14,7 +14,10 @@ type Lead struct{
 }
 
 func GetLeads(c *fiber.Ctx){
-
+	db := database.DBConn
+	var leads []Lead
+	db.Find(&leads)
+	c.JSON(leads)
 }
 
 func GetLead(c *fiber.Ctx){
