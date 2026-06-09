@@ -1,10 +1,10 @@
 package main
 import(
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/glebarez/go-sqlite"
 	"github.com/prensmatt/go-fiber-crm-basic/lead"
 	"github.com/prensmatt/go-fiber-crm-basic/database"
-	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber"
 	"fmt"
 )
 
@@ -17,7 +17,7 @@ func setupRoutes(app *fiber.App){
 
 func initDatabase(){
 	var err error
-	database.DBConn, err = gorm.Open("sqlite3","leads.db")
+	database.DBConn, err = gorm.Open("sqlite","leads.db")
 	if err != nil{
 		panic("failed to connect database")
 	}
